@@ -5,12 +5,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+API_KEY = os.getenv("GEMINI_API_KEY")
+
+print("API KEY:", API_KEY[:10] if API_KEY else "NOT FOUND")
+
 genai.configure(
-    api_key=os.getenv("GEMINI_API_KEY")
+    api_key=API_KEY
 )
 
 model = genai.GenerativeModel(
-    "gemini-2.5-flash"
+    "gemini-1.5-flash"
 )
 
 
@@ -61,11 +65,21 @@ Provide:
 Keep response under 250 words.
 """
 
-    response = model.generate_content(
-        prompt
-    )
+    try:
+        response = model.generate_content(prompt)
+        return response.text
 
-    return response.text
+    except Exception as e:
+        print("Gemini Error:", e)
+
+        return """
+OceanPulse AI is temporarily unavailable.
+
+Current conditions indicate elevated ocean stress.
+Rising sea temperatures and heat anomalies may increase coral bleaching risk and ecosystem instability.
+
+Please try again later.
+"""
 
 
 def ask_ocean_ai(
@@ -113,9 +127,21 @@ Maximum 150 words.
 Explain in simple language.
 """
 
-    response = model.generate_content(prompt)
+    try:
+        response = model.generate_content(prompt)
+        return response.text
 
-    return response.text
+    except Exception as e:
+        print("Gemini Error:", e)
+
+        return """
+OceanPulse AI is temporarily unavailable because the AI quota has been exceeded.
+
+Based on the available ocean data, the region should continue to be monitored for temperature changes, bleaching risk, and ecosystem health.
+
+Please try again later.
+"""
+
 
 def simulate_environmental_impact(
     region_name,
@@ -162,6 +188,17 @@ Keep response under 200 words.
 Use simple language.
 """
 
-    response = model.generate_content(prompt)
+    try:
+        response = model.generate_content(prompt)
+        return response.text
 
-    return response.text
+    except Exception as e:
+        print("Gemini Error:", e)
+
+        return """
+Simulation temporarily unavailable because the AI quota has been exceeded.
+
+Higher emissions and pollution generally reduce ocean health, while stronger conservation efforts improve ecosystem resilience and long-term sustainability.
+
+Please try again later.
+"""

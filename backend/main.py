@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from api.routes.regions import router as region_router
 from api.routes.metrics import router as metrics_router
@@ -10,11 +11,22 @@ from api.routes.ocean_data import (
     router as ocean_data_router
 )
 
-
 app = FastAPI(
     title="OceanPulse AI"
 )
 
+# CORS Configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "*"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Routes
 app.include_router(
     region_router
 )
