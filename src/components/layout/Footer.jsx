@@ -51,7 +51,7 @@ export default function Footer() {
             Built with <Heart className="w-3 h-3 text-[#FF5252]" /> for the ocean
           </p>
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} OceanPulse AI — Hackathon MVP
+            © {new Date().getFullYear()} OceanPulse AI
           </p>
         </div>
       </div>
