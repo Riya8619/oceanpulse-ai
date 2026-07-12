@@ -4,6 +4,7 @@ AI-powered ocean health monitoring platform. FastAPI backend + React/Vite fronte
 
 ## Project Structure.
 ├── backend/     # FastAPI + PostgreSQL (Neon) + Gemini AI
+
 └── src/         # React frontend source (repo root doubles as the frontend project)## Prerequisites
 
 - Python 3.11+
